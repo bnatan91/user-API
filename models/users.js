@@ -23,10 +23,11 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
          },
          phoneNumber: Sequelize.INTEGER,
-         bio: Sequelize.STRING,
+         refreshToken: Sequelize.STRING,
+         bio: Sequelize.TEXT,
          company: Sequelize.STRING,
          position: Sequelize.STRING,
-         profilePhoto: Sequelize.BLOB
+         profilePhoto: Sequelize.STRING
       });
     return Users;
   };

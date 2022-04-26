@@ -9,15 +9,15 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   //
 };
-// Find a singleUser with an id
+// Find a single User with an id
 exports.findOne = (req, res) => {
   //
 };
-// Update aUser by the id in the request
+// Update a User by the id in the request
 exports.update = (req, res) => {
   //
 };
-// Delete aUser with the specified id in the request
+// Delete a User with the specified id in the request
 exports.delete = (req, res) => {
   //
 };
