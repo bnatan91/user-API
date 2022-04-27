@@ -17,6 +17,6 @@ module.exports = (app) => {
   // Delete a Tutorial with id
   router.delete('/:id', users.delete);
   // Delete all Tutorials
-  router.delete('/', users.deleteAll);
+  // router.delete('/', users.deleteAll); // SEREM ANYINGG
   app.use('/api/users', router);
 };

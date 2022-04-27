@@ -22,7 +22,6 @@ exports.create = async (req, res) => {
       console.log("successfully add user");
       console.log(data);
       return res.send(data);
-
     })
     .catch(err => {
       console.log(err)
