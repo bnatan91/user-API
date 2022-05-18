@@ -54,7 +54,7 @@ exports.findOne = async (req, res) => {
     });
 };
 // Update a User by the id in the request
-exports.update =  (req, res) => {
+exports.update = async (req, res) => {
   const email = req.params.email;
   User.update(req.body, {
     where: { email: email }

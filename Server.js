@@ -8,6 +8,8 @@ let corsOptions = {
   origin: "http://localhost:8081"
 };
 
+app.use(bodyParser.urlencoded({extended:true}));
+
 app.use(cors(corsOptions));
 // app.use(cors());
 
