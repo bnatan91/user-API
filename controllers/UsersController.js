@@ -8,18 +8,6 @@ exports.create = async (req, res) => {
     return res.status(400).send({ message: "Content can not be empty" });
 
   console.log(req.body);
-  // const user = {
-  //   firstName: req.body.firstName,
-  //   lastName: req.body.lastName,
-  //   email: req.body.email,
-  //   password: req.body.password,
-  //   phoneNumber: req.body.phoneNumber,
-  //   refreshToken: req.body.refreshToken,
-  //   bio: req.body.bio,
-  //   company: req.body.company,
-  //   position: req.body.position,
-  //   profilePhoto: req.body.profilePhoto
-  // };
 
   await User.create(req.body)
     .then(data => {
@@ -91,6 +79,26 @@ exports.update =  (req, res) => {
 // Delete a User with the specified id in the request
 exports.delete = async (req, res) => {
   //
+  const email = req.params.email;
+  User.destroy({
+    where: { email: email }
+  })
+      .then(email => {
+        if (email) {
+          res.send({
+            message: "User was delete successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot delete User with email=${email}. Maybe Tutorial was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error deleting User with email=" + email
+        });
+      });
 };
 // Delete all User from the database.
 exports.deleteAll = async (req, res) => {

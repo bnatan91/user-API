@@ -13,7 +13,7 @@ module.exports = (app) => {
   // Update a Tutorial with id
   router.patch('/update/:email', users.update);
   // Delete a Tutorial with id
-  router.delete('/:id', users.delete);
+  router.delete('/delete/:email', users.delete);
   // Delete all Tutorials
   // router.delete('/', users.deleteAll); // SEREM ANYINGG
   app.use('/api/users', router);
