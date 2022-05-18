@@ -2,7 +2,7 @@ const db = require('../models');
 const User = db.users;
 // Create and Save a new User
 exports.create = async (req, res) => {
-  
+
   // Check req.body whether object is empty
   if (Object.keys(req.body).length === 0)
     return res.status(400).send({ message: "Content can not be empty" });
@@ -21,10 +21,10 @@ exports.create = async (req, res) => {
   //   profilePhoto: req.body.profilePhoto
   // };
 
-  User.create(req.body)
+  await User.create(req.body)
     .then(data => {
-      res.send(data);
       console.log("successfully add user");
+      return res.send(data);
     })
     .catch(err => {
       console.log(err)
@@ -33,8 +33,6 @@ exports.create = async (req, res) => {
           err.message || "some error occurred while creating the user"
       });
     });
-
-  return res.json({message: "Success Added User"});
 
 };
 // Retrieve all User from the database.
@@ -50,17 +48,17 @@ exports.findAll = async (req, res) => {
 // Find a single User with an id
 exports.findOne = async (req, res) => {
   console.log('FIND ONE LERRRRRRRR');
-  // const email = req.query.email;
   const email = req.params.email;
-  console.log(email);
   await User.findOne({
     where: { email: email }
   })
     .then(data => {
       if (data) {
+        console.log(data);
         res.send(data);
       }
       else {
+        console.log('Data is empty');
         res.status(404).send({
           message: "Cannot find email"
         });
