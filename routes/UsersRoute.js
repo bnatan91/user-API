@@ -11,10 +11,10 @@ module.exports = (app) => {
   // Retrieve a single Tutorial with id
   router.get('/:email', users.findOne);
   // Update a Tutorial with id
-  router.patch('/:id', users.update);
+  router.patch('/update/:email', users.update);
   // Delete a Tutorial with id
   router.delete('/:id', users.delete);
   // Delete all Tutorials
   // router.delete('/', users.deleteAll); // SEREM ANYINGG
-  app.use('/api', router);
+  app.use('/api/users', router);
 };

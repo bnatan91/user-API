@@ -66,8 +66,27 @@ exports.findOne = async (req, res) => {
     });
 };
 // Update a User by the id in the request
-exports.update = async (req, res) => {
-  //
+exports.update =  (req, res) => {
+  const email = req.params.email;
+  User.update(req.body, {
+    where: { email: email }
+  })
+      .then(email => {
+        if (email) {
+          res.send({
+            message: "User was updated successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot update User with email=${email}. Maybe Tutorial was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating User with email=" + email
+        });
+      });
 };
 // Delete a User with the specified id in the request
 exports.delete = async (req, res) => {
