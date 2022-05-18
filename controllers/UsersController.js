@@ -71,6 +71,7 @@ exports.update =  (req, res) => {
         }
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message: "Error updating User with email=" + email
         });
@@ -95,13 +96,14 @@ exports.delete = async (req, res) => {
         }
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message: "Error deleting User with email=" + email
         });
       });
 };
 // Delete all User from the database.
-exports.deleteAll = async (req, res) => {
-  //
-};
+// exports.deleteAll = async (req, res) => {
+//   //
+// };
 
