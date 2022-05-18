@@ -1,0 +1,10 @@
+POST http://localhost:4011/api
+Content-Type: application/json
+
+{
+  "firstName": "Le",
+  "lastName": "Rucci",
+  "email": "rucci@gmail.com",
+  "password": "rucci123",
+  "phoneNumber": "08122345"
+}

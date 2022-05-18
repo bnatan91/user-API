@@ -2,28 +2,29 @@ const db = require('../models');
 const User = db.users;
 // Create and Save a new User
 exports.create = async (req, res) => {
-  //
-  // validate request
-  if (!req.body.id) { }
-  res.status(400).send({ message: "Content can not be empty" });
+  
+  // Check req.body whether object is empty
+  if (Object.keys(req.body).length === 0)
+    return res.status(400).send({ message: "Content can not be empty" });
 
-  const user = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    phoneNumber: req.body.phoneNumber,
-    refreshToken: req.body.refreshToken,
-    bio: req.body.bio,
-    company: req.body.company,
-    position: req.body.position,
-    profilePhoto: req.body.profilePhoto
-  };
-  User.create(user)
+  console.log(req.body);
+  // const user = {
+  //   firstName: req.body.firstName,
+  //   lastName: req.body.lastName,
+  //   email: req.body.email,
+  //   password: req.body.password,
+  //   phoneNumber: req.body.phoneNumber,
+  //   refreshToken: req.body.refreshToken,
+  //   bio: req.body.bio,
+  //   company: req.body.company,
+  //   position: req.body.position,
+  //   profilePhoto: req.body.profilePhoto
+  // };
+
+  User.create(req.body)
     .then(data => {
       res.send(data);
       console.log("successfully add user");
-
     })
     .catch(err => {
       console.log(err)
@@ -33,6 +34,7 @@ exports.create = async (req, res) => {
       });
     });
 
+  return res.json({message: "Success Added User"});
 
 };
 // Retrieve all User from the database.
@@ -52,7 +54,7 @@ exports.findOne = async (req, res) => {
   const email = req.params.email;
   console.log(email);
   await User.findOne({
-    where: {email: email}
+    where: { email: email }
   })
     .then(data => {
       if (data) {
