@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(500).send({
+      return res.status(500).send({
         message:
           err.message || "some error occurred while creating the user"
       });
@@ -43,11 +43,11 @@ exports.findOne = async (req, res) => {
     .then(data => {
       if (data) {
         console.log(data);
-        res.send(data);
+        return res.send(data);
       }
       else {
         console.log('Data is empty');
-        res.status(404).send({
+        return res.status(404).send({
           message: "Cannot find email"
         });
       }
@@ -59,23 +59,23 @@ exports.update = async (req, res) => {
   User.update(req.body, {
     where: { email: email }
   })
-      .then(email => {
-        if (email) {
-          res.send({
-            message: "User was updated successfully."
-          });
-        } else {
-          res.send({
-            message: `Cannot update User with email=${email}. Maybe Tutorial was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        res.status(500).send({
-          message: "Error updating User with email=" + email
+    .then(email => {
+      if (email) {
+        res.send({
+          message: "User was updated successfully."
         });
+      } else {
+        res.send({
+          message: `Cannot update User with email=${email}. Maybe Tutorial was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send({
+        message: "Error updating User with email=" + email
       });
+    });
 };
 // Delete a User with the specified id in the request
 exports.delete = async (req, res) => {
@@ -84,24 +84,46 @@ exports.delete = async (req, res) => {
   User.destroy({
     where: { email: email }
   })
-      .then(email => {
-        if (email) {
-          res.send({
-            message: "User was delete successfully."
-          });
-        } else {
-          res.send({
-            message: `Cannot delete User with email=${email}. Maybe Tutorial was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        res.status(500).send({
-          message: "Error deleting User with email=" + email
+    .then(email => {
+      if (email) {
+        res.send({
+          message: "User was delete successfully."
         });
+      } else {
+        res.send({
+          message: `Cannot delete User with email=${email}. Maybe Tutorial was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send({
+        message: "Error deleting User with email=" + email
       });
+    });
 };
+exports.updateRefreshToken = async (req, res) => {
+  console.log(req.params.email);
+  console.log(req.body);
+  const email = req.params.email;
+  User.update(req.body, {
+    where: { email: email }
+  })
+    .then(email => {
+      if (email) {
+        res.send({message: "RefreshToken was updated successfully."});
+      } else {
+        res.send({message: `Cannot update RefreshToken with email=${email}. Maybe Tutorial was not found or req.body is empty!`});
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send({
+        message: "Error updating RefreshToken with email=" + email
+      });
+    });
+  // return res.send({ message: "Apalah" });
+}
 // Delete all User from the database.
 // exports.deleteAll = async (req, res) => {
 //   //

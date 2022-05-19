@@ -10,8 +10,8 @@ let corsOptions = {
 
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use(cors(corsOptions));
-// app.use(cors());
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -21,18 +21,22 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./models");
 
-db.sequelize.sync();
+// db.sequelize.sync();
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to bezkoder application." });
+// });
 
 require("./routes/UsersRoute")(app);
 
+app.all('*', (req, res) => {
+  return res.json({message: 'Public Service - Wrong Endpoint'})
+});
+
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-// const PORT = 4011;
+// const PORT = process.env.PORT || 8080;
+const PORT = 4011;
 app.listen(PORT, () => {
   console.log(`${PORT} - User Service`);
 });
