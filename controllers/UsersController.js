@@ -129,3 +129,21 @@ exports.updateRefreshToken = async (req, res) => {
 //   //
 // };
 
+exports.getUsersByRefreshToken = (req, res) => {
+  const refreshToken = req.params.refreshToken;
+  console.log(refreshToken);
+  
+  User.findAll({
+    where: {
+      refreshToken: refreshToken
+    }
+  }).then(data => {
+    console.log(data);
+    return res.send(data);
+  }).catch(err => {
+    console.log(err);
+    return res.status(500).send({
+      message: "Internal Server Error"
+    })
+  })
+}

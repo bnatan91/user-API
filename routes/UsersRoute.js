@@ -16,7 +16,10 @@ module.exports = (app) => {
   router.patch('/update/:email', users.update);
   // Delete a Tutorial with id
   router.delete('/delete/:email', users.delete);
+  
+  router.get('/getUsersByRefreshToken/:refreshToken', users.getUsersByRefreshToken);
+
   // Delete all Tutorials
-  // router.delete('/', users.deleteAll); // SEREM ANYINGG
+  // router.delete('/', users.deleteAll); 
   app.use('/api/user', router);
 };
