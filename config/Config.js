@@ -2,7 +2,7 @@ module.exports = {
   HOST: 'localhost',
   USER: 'root',
   PASSWORD: '',
-  DB: 'cranium_phase1',
+  DB: 'cranium_development',
   dialect: 'mysql',
   pool: {
     max: 5,
