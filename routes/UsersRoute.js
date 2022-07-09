@@ -17,7 +17,7 @@ module.exports = (app) => {
   
   router.patch('/refreshToken/:email', users.updateRefreshToken);
 
-  router.get('/getUsersByRefreshToken/:refreshToken', users.getUsersByRefreshToken);
+  router.get('/findUsers/:refreshToken', users.getUsersByRefreshToken);
 
   // Delete all Tutorials
   // router.delete('/', users.deleteAll); 
