@@ -8,8 +8,6 @@ module.exports = (app) => {
   // Retrieve all Tutorials
   router.get('/', users.findAll);
 
-  router.patch('/refreshToken/:email', users.updateRefreshToken);
-
   // Retrieve a single Tutorial with id
   router.get('/findOne/:email', users.findOne);
   // Update a Tutorial with id
@@ -17,6 +15,8 @@ module.exports = (app) => {
   // Delete a Tutorial with id
   router.delete('/delete/:email', users.delete);
   
+  router.patch('/refreshToken/:email', users.updateRefreshToken);
+
   router.get('/getUsersByRefreshToken/:refreshToken', users.getUsersByRefreshToken);
 
   // Delete all Tutorials
